@@ -28,9 +28,9 @@ export default class App extends Component {
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
         <Scene key="root" hideNavBar={true}>
           <Scene key="tabbar" tabs={true} >
-            <Scene key="tab3" component={Saved} title="Tab #3" icon={TabIcon}/>
-            <Scene key="tab4" component={MapPage} title="Tab #4" icon={TabIcon}/>
-            <Scene key="tab5" component={CameraPage} title="Tab #5" icon={TabIcon} />
+            <Scene key="tab3" component={Saved} title="Saved" icon={TabIcon}/>
+            <Scene key="tab4" component={MapPage} title="Map" icon={TabIcon}/>
+            <Scene key="tab5" component={CameraPage} title="Photo" icon={TabIcon} />
           </Scene>
         </Scene>
       </Router>
