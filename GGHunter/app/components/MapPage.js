@@ -16,15 +16,15 @@ export default class MapPage extends Component {
     super(props, context)
     this.state = {
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 49.30080957108101,
+        longitude: -123.1337930524565,
         latitudeDelta: 0.0461,
         longitudeDelta: 0.0210,
       },
       geoPosition: {
         coords:{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 49.30080957108101,
+          longitude: -123.1337930524565,
         }
       },
       isUsingCustomPosition: false,
