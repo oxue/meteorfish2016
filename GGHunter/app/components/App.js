@@ -12,6 +12,7 @@ import React, {
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 import CameraPage from './CameraPage'
 import MapPage from './MapPage'
+import Saved from './Saved'
 
 class TabIcon extends React.Component {
   render(){
@@ -27,7 +28,7 @@ export default class App extends Component {
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
         <Scene key="root" hideNavBar={true}>
           <Scene key="tabbar" tabs={true} >
-            <Scene key="tab3" component={MapPage} title="Tab #3" icon={TabIcon}/>
+            <Scene key="tab3" component={Saved} title="Tab #3" icon={TabIcon}/>
             <Scene key="tab4" component={MapPage} title="Tab #4" icon={TabIcon}/>
             <Scene key="tab5" component={CameraPage} title="Tab #5" icon={TabIcon} />
           </Scene>
