@@ -27,31 +27,36 @@ export default class MapPage extends Component {
           longitude: -122.4324,
         }
       },
-
+      isUsingCustomPosition: false,
     }
     this.watchID = null
   }
   componentWillMount(){
     navigator.geolocation.getCurrentPosition(
-      (geoPosition)=>{
+      geoPosition=>{
         this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
       },
-      (error) => console.err(error),
+      error => console.err(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
     navigator.geolocation.watchPosition(
-      (geoPosition)=>{
-        this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
+      geoPosition=>{
+        if(this.state.isUsingCustomPosition){
+          this.setState({ geoPosition })
+        } else {
+          this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
+        }
       },
-      (error) => console.err(error),
+      error => console.err(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
   }
   onRegionChange(region) {
-    this.setState({ region })
+    this.setState({ region, isUsingCustomPosition: true })
   }
   onCenter(){
-    console.warn('On Center')
+    let geoPosition = this.state.geoPosition
+    this.setState({ region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude, isUsingCustomPosition: false} })
   }
   render() {
     return (
