@@ -18,24 +18,34 @@ export default class MapPage extends Component {
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.0461,
+        longitudeDelta: 0.0210,
       },
       geoPosition: {
         coords:{
           latitude: 37.78825,
           longitude: -122.4324,
         }
-      }
+      },
+
     }
+    this.watchID = null
   }
   componentWillMount(){
-    navigator.geolocation.getCurrentPosition((geoPosition)=>{
-      console.log({ geoPosition })
-    })
-    navigator.geolocation.watchPosition((geoPosition)=>{
-      console.log({ geoPosition })
-    })
+    navigator.geolocation.getCurrentPosition(
+      (geoPosition)=>{
+        this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
+      },
+      (error) => console.err(error),
+      {enableHighAccuracy: true, timeout: 20000},
+    )
+    navigator.geolocation.watchPosition(
+      (geoPosition)=>{
+        this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
+      },
+      (error) => console.err(error),
+      {enableHighAccuracy: true, timeout: 20000},
+    )
   }
   onRegionChange(region) {
     this.setState({ region })
