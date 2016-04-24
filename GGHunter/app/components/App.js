@@ -52,10 +52,10 @@ export default class App extends Component {
     return (
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
         <Scene key="root" hideNavBar={true}>
-          <Scene key="tabbar" tabs={true}   tabBarStyle={{backgroundColor: '#4842B8'}} >
-            <Scene key="tab3" component={Saved} title="About" icon={TabIcon} titleStyle={{color: 'white'}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
+          <Scene key="tabbar" tabs={true} tabBarStyle={{backgroundColor: '#4842B8'}} >
+            <Scene key="tab3" component={Saved} title="About" icon={TabIcon} titleStyle={{color: 'white', top:10, bottom:0}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
             <Scene key="accordion" initial={true} component={Accordion} title="New Ghost Gear" icon={TabIcon} titleStyle={{color: 'white', top:10, bottom:0}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
-            <Scene key="tab4" component={MapPage} title="Report Statuses" icon={TabIcon}/>
+            <Scene key="tab4" component={MapPage} titleStyle={{color: 'white', top:10, bottom:0}} title="Report Statuses" icon={TabIcon} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
           </Scene>
         </Scene>
       </Router>

@@ -229,6 +229,8 @@ transparent={this.state.transparent}>
       case 'Date':
       return (
         <View style={styles.content}>
+          <TouchableOpacity>
+          </TouchableOpacity>
         <TextInput ref = 'Date'
           style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({date: text})}
@@ -300,7 +302,7 @@ transparent={this.state.transparent}>
       geoPosition=>{
         this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
       },
-      error => console.error(error),
+      error => console.log(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
     navigator.geolocation.watchPosition(
@@ -311,7 +313,7 @@ transparent={this.state.transparent}>
           this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
         }
       },
-      error => console.error(error),
+      error => console.log(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
   }
@@ -367,20 +369,20 @@ this.setState({isModalOpen2: true});
         <View style={{alignItems: 'center', backgroundColor: '#EEEEEE'}} elevation={8}>
           { this.props.img
             ? <Image source = {{uri : this.props.img}} style = {imageStyle} />
-            : <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}}>
+            : <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE', paddingBottom: 60}}>
               <Text style={styles.text}>
                 Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
               </Text>
               <Text style={[styles.text, {marginTop: 20}]}>
                 Your action matters, numerous marine lives will be saved because of you!
               </Text>
-              <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
+              <TouchableOpacity style={{position: 'absolute', right: width / 2 - 25, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
                 <Image style={{width: 50, height: 50}} source={require('../img/camera_red.png')}/>
               </TouchableOpacity>
             </View>
           }
           { this.props.img
-            ? <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
+            ? <TouchableOpacity style={{position: 'absolute', right:  width / 2 - 25, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
                 <Image style={{width: 50, height: 50}} source={require('../img/camera_red.png')}/>
               </TouchableOpacity>
             : null

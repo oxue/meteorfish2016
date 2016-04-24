@@ -10,6 +10,8 @@ import React, {
   ListView,
   Geolocation,
   Slider,
+  ScrollView,
+  StatusBar,
 } from 'react-native'
 
 let {width, height} = Dimensions.get('window')
@@ -23,36 +25,12 @@ export default class Saved extends Component{
   }
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-          <Text>{this.state.sliderValue.toFixed(0, 10)}</Text>
+      <ScrollView style={styles.container}>
+        <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
+        <View style={{margin: 20}}>
+          <Text>Ghost Gear Hunter (GGHunter) is a mobile app that facilitates crowdsourcing of fishing gear debris location and contextual data. This leverages the wide distribution of keen environmentalists and ‘citizen scientists’ as well as the GPS, data and photo capabilities  of mobile devices to convey a precise location of aquatic fishing debris to researchers. An easy and intuitive user interface encourages data collection by members of the public by making it easy to report lost fishing gear. Users can submit photos as well as identifying data that will help researchers more accurately understand the distribution and impact of various types of fishing gear. Lastly the app provides users with information regarding how their data submission has been helpful to researchers, providing them with positive motivation to continue contributing to the dataset and the ongoing efforts to clean up debris from our coastal waters.</Text>
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{flex: 1}}>
-            <Text style={{fontSize: 11, marginLeft: 10}}>Mesh Size (mm)</Text>
-          </View>
-          <View style={{flex:2, marginHorizontal: 10}}>
-            <Slider
-              value={this.state.sliderValue}
-              onValueChange={(sliderValue)=>this.setState({sliderValue})}
-              onSlidingComplete={(sliderValue)=>{}}
-              maximumValue={250}
-              minimumValue={0}
-            />
-          </View>
-        </View>
-        <View style={styles.fingerButtonContainer}>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-          <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     )
   }
 }
