@@ -28,14 +28,16 @@ class TabIcon extends React.Component {
 
 export default class App extends Component {
   componentDidMount(){
-    fetch(server_url + '/parse/classes/gear', {
+    fetch(server_url + '/parse/classes/gear?where='+encodeURIComponent('{"color":"green"}'), {
       method: 'GET',
       headers: {
         'X-Parse-Application-Id': app_id,
         'X-Parse-REST-API-Key': undefined,
-      }
+        //'Content-Type': ''
+      },
     }).then((response)=>response.json()).then((jsonResponse)=>{
-      console.log(jsonResponse.results[0].picture.url)
+      //console.log(jsonResponse.results[0].picture.url)
+      alert(JSON.stringify(jsonResponse.results))
     })
   }
   render() {

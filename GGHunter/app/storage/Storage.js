@@ -21,6 +21,9 @@ export default class Storage extends Component {
         'X-Parse-Application-Id': app_id,
         'X-Parse-REST-API-Key': undefined,
       }
+      body:{
+        color:'green'
+      }
     }).then((response)=>response.json()).then((jsonResponse)=>{
       console.log(jsonResponse.results[0].color)
     })

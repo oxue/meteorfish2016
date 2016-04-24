@@ -18,7 +18,7 @@ const SECTIONS = [
   }
 ]
 
-export default class Accordion extends Component {
+export default class AccordionPage extends Component {
   _renderHeader(section) {
     return (
       <View style={styles.header}>
