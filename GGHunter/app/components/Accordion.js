@@ -111,8 +111,13 @@ export default class AccordionPage extends Component {
           <Text style={[styles.text, {marginTop: 20}]}>
             Your action matters, numerous marine lives will be saved because of you!
           </Text>
+          <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8}>
+            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25}} elevation={8}>
+            </View>
+          </TouchableOpacity>
         </View>
-        <MapView style={{height: 300}}
+
+        <MapView style={{height: 200}}
           region={this.state.region}
           onRegionChange={(region)=>this.onRegionChange(region)}>
           <MapView.Marker
