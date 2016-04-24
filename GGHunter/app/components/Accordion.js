@@ -28,9 +28,9 @@ export default class AccordionPage extends Component {
   constructor(props, context){
     super(props, context)
     this.state = {
-      date: '',
-      month: '',
-      year: '',
+      date: 'Date',
+      month: 'Month',
+      year: 'Year',
     }}
 
 
@@ -38,7 +38,7 @@ export default class AccordionPage extends Component {
     return (
       <View style={styles.header}>
         <Text style={styles.firstText}>{section.firstln}</Text>
-        <Text style={styles.secondText}>{this.state}</Text>
+        <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
       </View>
     )
   }
@@ -46,14 +46,22 @@ export default class AccordionPage extends Component {
   _renderContent(section) {
     return (
       <View style={styles.content}>
-      <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+      <TextInput ref = 'Date'
+        style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
         onChangeText={(text) => this.setState({date: text})}
-        value={this.state.date}
-
-
-      />
-      </View>
+        maxLength = {2}
+        placeholder='DD'/>
+        <TextInput ref = 'Month'
+          style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => this.setState({month: text})}
+          maxLength = {2}
+          placeholder='MM'/>
+      <TextInput ref = 'Year'
+        style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({year: text})}
+        maxLength = {4}
+        placeholder='YYYY'/>
+    </View>
     )
   }
 
@@ -64,7 +72,7 @@ export default class AccordionPage extends Component {
           sections={SECTIONS}
           initiallyActiveSection = {0}
           duration = {350}
-          renderHeader={this._renderHeader}
+          renderHeader={this._renderHeader.bind(this)}
           renderContent={this._renderContent.bind(this)}
         />
       </View>
@@ -83,6 +91,8 @@ const styles = StyleSheet.create({
   },
   content: {
     height: 60,
+    flexDirection : 'row',
+
     backgroundColor: 'white',
   },
   firstText: {
