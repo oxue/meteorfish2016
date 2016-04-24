@@ -12,6 +12,7 @@ import React, {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  Modal,
   Slider,
 } from 'react-native'
 import {Actions} from 'react-native-router-flux'
@@ -36,6 +37,9 @@ export default class AccordionPage extends Component {
       month: 'Month',
       year: 'Year',
       colour: 'Colour',
+      isModalOpen: false,
+	  animated: true,
+	  transparent: false,
       meshSize: 'Size',
       mestTwine: 'Twine',
       region: {
@@ -67,8 +71,42 @@ export default class AccordionPage extends Component {
     </View>
   }
   renderMeshHeader(){
+     var modalBackgroundStyle = {
+      backgroundColor: this.state.transparent ? 'rgba(0, 0, 0, 0.5)' : '#f5fcff',
+    };
+    var innerContainerTransparentStyle = this.state.transparent
+      ? {backgroundColor: '#fff', padding: 20}
+      : null;
+	  
     return <View style={styles.header}>
       <Text style={styles.firstText}>Mesh Size Measurement</Text>
+	  <TouchableOpacity onPress={() => this.openModal()}>
+		<Image style={styles.question} source={require('../img/question.png')}/>
+      </TouchableOpacity>
+<Modal visible={this.state.isModalOpen} onRequestClose={() => {this.closeModal()}}
+style={styles.modal}
+animated={this.state.animated}
+transparent={this.state.transparent}>
+
+	<View style={[styles.container2, modalBackgroundStyle]}>
+		<View style={[styles.innerContainer, innerContainerTransparentStyle]}>
+			<Image
+			style={styles.icon}
+			source={require('../img/mesh_size_instruction.png')}
+			/>
+			<Text style={styles.titleText}>
+			{'The Net Kit uses the standard net measurement of stretched mesh size to determine the net\'s mesh size. Start by selecting a selection of the net that looks undamaged.\n\nStretch a square of net by two of the knots so that the other two knots meet in the middle. If the meshes do not meet, try using the other two knots of the same mesh. If the knots still do not meet evenly, this section of the net is damaged and another section should be used.\n\nMeasure the distance between the inside of the knots, this is the mesh size. Callipers, a 30cm ruler or a measuring tape can be used to take this measurement.'}
+			</Text>
+			<TouchableOpacity onPress={() => this.closeModal()}>
+				<Text
+				style={styles.modalCloseText}>
+				OKAY
+				</Text>
+			</TouchableOpacity>
+		</View>
+	</View>
+
+</Modal>
       <Text style={styles.secondText}>{Math.round(this.state.sliderValue) + ' mm'}</Text>
     </View>
   }
@@ -206,6 +244,31 @@ export default class AccordionPage extends Component {
   takePhoto(){
     Actions.tab5()
   }
+	openModal() {
+		this.setState({isModalOpen: true});
+
+		// let str_json = '{ "reports" : [' +
+		// '{ "firstName":"John" , "statusNow":"Report Received" },' +
+		// '{ "firstName":"Kyle" , "statusNow":"Done" },' +
+		// '{ "firstName":"Kyle" , "statusNow":"Additional Information Required" },' +
+		// '{ "firstName":"Anna" , "statusNow":"Personnel Dispatched" },' +
+		// '{ "firstName":"Peter" , "statusNow":"Net Retrieved" } ]}';
+
+		// fetch('http://gerrycao.com/gghunter/processjson2.php', {
+			// method: 'POST',
+			// headers: {
+			// 'Accept': 'application/json',
+			// 'Content-Type': 'application/json',
+			// },
+			// body: str_json
+		// }).then((response) =>
+			// console.log('OK!')
+		// )
+	}
+  
+  closeModal() {
+    this.setState({isModalOpen: false});
+  }
   render() {
     var imageStyle = [styles.image, {width: Dimensions.get('window').width/2, height: 150 , padding: 0, margin: 0}];
 
@@ -324,6 +387,34 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+  },
+  question: {
+    width: 25,
+	height: 25,
+  },
+  modal: {
+	width: width - 20,
+	height: height - 20,
+	},
+  icon: {
+    width: width-40,
+	height: 225,
+  },
+  modalCloseText: {
+    fontSize: 15,
+    marginRight: 10,
+	marginTop: 10,
+    textAlign: 'right',
+    color: '#2196F3',
+  },
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+	margin: 10,
+  },
+  innerContainer: {
+    borderRadius: 10,
   },
   fingerButton: {
     width: width*0.185,
