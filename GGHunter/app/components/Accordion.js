@@ -77,7 +77,7 @@ export default class AccordionPage extends Component {
     var innerContainerTransparentStyle = this.state.transparent
       ? {backgroundColor: '#fff', padding: 20}
       : null;
-	  
+
     return <View style={styles.header}>
       <Text style={styles.firstText}>Mesh Size Measurement</Text>
 	  <TouchableOpacity onPress={() => this.openModal()}>
@@ -125,7 +125,7 @@ transparent={this.state.transparent}>
     var imguri = this.props.img
     var body = new FormData()
     var guid = 'id' + Math.random()
-    body.append('picture', 
+    body.append('picture',
     {
         uri:imguri.toString(),
         type: "image/jpeg",
@@ -292,7 +292,7 @@ transparent={this.state.transparent}>
 			// console.log('OK!')
 		// )
 	}
-  
+
   closeModal() {
     this.setState({isModalOpen: false});
   }
@@ -304,25 +304,30 @@ transparent={this.state.transparent}>
       <ScrollView style={styles.container}>
         <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
         <View style={{alignItems: 'center', backgroundColor: '#EEEEEE'}} elevation={8}>
-        {( (this.props.img !=null && this.props.img !=undefined)
-          ? <Image source = {{uri : this.props.img}} style = {imageStyle} ></Image>
-          : <Text style={{ margin: 15,
-            color: '#7C7C7C',
-            fontSize: 14,
-          }}>Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!</Text>)
-            }
-
-          <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
-            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
-              <Text style={{color: 'white', fontSize: 25}}>+</Text>
+          { this.props.img
+            ? <Image source = {{uri : this.props.img}} style = {imageStyle} />
+            : <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}}>
+              <Text style={styles.text}>
+                Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
+              </Text>
+              <Text style={[styles.text, {marginTop: 20}]}>
+                Your action matters, numerous marine lives will be saved because of you!
+              </Text>
+              <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
+                <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
+                  <Text style={{color: 'white', fontSize: 25}}>+</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{position: 'absolute', right: 80, bottom: 0, padding: 4}} elevation={8} onPress = {this.submitAll.bind(this)}>
-            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
-              <Text style={{color: 'white', fontSize: 25}}>^</Text>
-            </View>
-          </TouchableOpacity>
+          }
+          { this.props.img
+            ? <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
+                <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
+                  <Text style={{color: 'white', fontSize: 25}}>+</Text>
+                </View>
+              </TouchableOpacity>
+            : null
+          }
         </View>
 
         <MapView style={{height: 200}}
