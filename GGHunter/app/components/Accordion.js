@@ -38,6 +38,7 @@ export default class AccordionPage extends Component {
       year: 'Year',
       colour: 'Colour',
       isModalOpen: false,
+      isModalOpen2: false,
 	  animated: true,
 	  transparent: false,
       meshSize: 'Size',
@@ -71,9 +72,12 @@ export default class AccordionPage extends Component {
   }
   renderColourHeader(){
     return <View style={styles.header}>
-      <View style={styles.rowTextContainer}>
-        <Text style={styles.firstText}>Colour</Text>
-        <Text style={styles.secondText}>{this.state.colour}</Text>
+    <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+      <Image style={{width: 40, height: 40, marginLeft: 20 }} source={require('../img/ic_color_lens_white_24dp.png')} resizeMode='contain'/>
+        <View style={styles.rowTextContainer}>
+          <Text style={styles.firstText}>Colour</Text>
+          <Text style={styles.secondText}>{this.state.colour}</Text>
+        </View>
       </View>
     </View>
   }
@@ -86,7 +90,9 @@ export default class AccordionPage extends Component {
       : null;
 
     return <View style={styles.header}>
-      <View style={{flex:1, flexDirection: 'row'}}>
+      <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+
+      <Image style={{width: 40, height: 40, marginLeft: 20 }} source={require('../img/ic_rounded_corner_white.png')} resizeMode='contain'/>
         <View style={[styles.rowTextContainer, {flex: 0}]}>
           <Text style={styles.firstText}>Mesh Size Measurement</Text>
           <Text style={styles.secondText}>{Math.round(this.state.sliderValue) + ' mm'}</Text>
@@ -123,14 +129,53 @@ transparent={this.state.transparent}>
     </View>
   }
   renderTwineHeader(){
+    var modalBackgroundStyle = {
+     backgroundColor: this.state.transparent ? 'rgba(0, 0, 0, 0.5)' : '#f5fcff',
+   };
+   var innerContainerTransparentStyle = this.state.transparent
+     ? {backgroundColor: '#fff', padding: 20}
+     : null;
     return <View style={styles.header}>
-      <Text style={styles.firstText}>Twine Size Measurement</Text>
+    <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+      <Image style={{width: 40, height: 40, marginLeft: 20 }} source={require('../img/ic_expand_more_white_24dp.png')} resizeMode='contain'/>
+      <View style={[styles.rowTextContainer, {flex: 0}]}>
+        <Text style={styles.firstText}>Confirm</Text>
+      </View>
+      <TouchableOpacity style={{marginLeft: 8, alignSelf: 'center'}} onPress={() => this.openModal2()}>
+        <Image style={styles.question} source={require('../img/question.png')}/>
+      </TouchableOpacity>
+      <Modal visible={this.state.isModalOpen2} onRequestClose={() => {this.closeModal2()}}
+      style={styles.modal}
+      animated={this.state.animated}
+      transparent={this.state.transparent}>
+
+        <View style={[styles.container2, modalBackgroundStyle]}>
+        <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
+        <Image
+        style={styles.icon2}
+        source={require('../img/ghostgearhunter.png')}
+        />
+        <TouchableOpacity onPress={() => this.closeModal2()}>
+        <Text
+        style={styles.modalCloseText}>
+        OKAY
+        </Text>
+        </TouchableOpacity>
+        </View>
+        </View>
+
+      </Modal>
+    </View>
     </View>
   }
   renderSubmitHeader(){
-    return <View style={{height: 60, backgroundColor: '#FF4366'}} onPress = {() => this.submitAll()}>
-      <Text style={styles.firstText}>Submit</Text>
-    </View>
+    return <TouchableOpacity style={{height: 60, backgroundColor: '#FF4366', marginBottom: 20}} onPress = {() => this.submitAll()}>
+    <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+      <View style={[styles.rowTextContainer, {alignItems: 'center'}]}>
+        <Text style={[styles.firstText, {fontSize: 17}]}>SUBMIT</Text>
+      </View>
+      </View>
+    </TouchableOpacity>
   }
   submitAll(){
     console.log('weed');
@@ -280,6 +325,10 @@ transparent={this.state.transparent}>
   takePhoto(){
     Actions.tab5()
   }
+  openModal2() {
+this.setState({isModalOpen2: true});
+
+}
 	openModal() {
 		this.setState({isModalOpen: true});
 
@@ -305,12 +354,15 @@ transparent={this.state.transparent}>
   closeModal() {
     this.setState({isModalOpen: false});
   }
+  closeModal2() {
+    this.setState({isModalOpen2: false});
+  }
   render() {
     var imageStyle = [styles.image, {width: Dimensions.get('window').width/2, height: 150 , padding: 0, margin: 0}];
 
     return (
 
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={{marginBottom: 100}}>
         <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
         <View style={{alignItems: 'center', backgroundColor: '#EEEEEE'}} elevation={8}>
           { this.props.img
@@ -370,6 +422,8 @@ const styles = StyleSheet.create({
   header: {
     height: 60,
     backgroundColor: '#6161c2',
+    marginVertical: 1,
+    elevation: 8,
   },
   content: {
     height: 60,
@@ -401,6 +455,7 @@ const styles = StyleSheet.create({
   },
   colorButtonContainer:{
     height: 200,
+    marginTop: 50,
     marginLeft: 8,
     flexWrap: 'wrap',
     flexDirection: 'row',
@@ -439,7 +494,11 @@ const styles = StyleSheet.create({
 	},
   icon: {
     width: width-40,
-	height: 225,
+	   height: 225,
+  },
+  icon2: {
+    width: width-70,
+    height: height - 70,
   },
   modalCloseText: {
     fontSize: 15,
