@@ -86,7 +86,33 @@ export default class AccordionPage extends Component {
     var imguri = this.props.img
     var body = new FormData()
     var guid = 'id' + Math.random()
-    body.append(imguri)
+    body.append('picture', 
+    {
+        uri:imguri.toString(),
+        type: "image/jpeg",
+        name: guid + ".jpeg"
+    });
+
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = (e) => {
+        if(req.readyState !== 4){
+            return;
+        }
+        if(req.status === 200){
+            console.log(req.response);
+        }else{
+            console.log('f');
+            console.log(req.responseText);
+        }
+    }
+    req.open('POST', "https://radiant-springs-15984.herokuapp.com/cool");
+    //req.open('POST', "https://ghostgearhunter.azurewebsites.net/parse/classes/file");
+
+    req.setRequestHeader("X-Parse-Application-Id","3f945af2-d32f-47cb-aa03-da745c50880d");
+    req.setRequestHeader("X-Parse-REST-API-Key", "undefined");
+
+    req.send(body);
   }
   _renderHeader(section) {
     switch(section.type){
