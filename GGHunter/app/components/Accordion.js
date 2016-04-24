@@ -17,16 +17,11 @@ let {width, height} = Dimensions.get('window')
 import MapView from 'react-native-maps'
 
 const SECTIONS = [
-  {
-    firstln: 'Date ghost gear discovered',
-    secondln: Date(),
-    content: 'Lorem ipsum...',
-  },
-  {
-    firstln: 'Colour',
-    secondln: 'Grey',
-    content: 'Lorem ipsum...',
-  }
+  { type: 'Date' },
+  { type: 'Colour' },
+  { type: 'Mesh' },
+  { type: 'Twine' },
+  { type: 'More' },
 ]
 
 export default class AccordionPage extends Component {
@@ -36,6 +31,9 @@ export default class AccordionPage extends Component {
       date: 'Date',
       month: 'Month',
       year: 'Year',
+      colour: 'Colour',
+      meshSize: 'Size',
+      mestTwine: 'Twine',
       region: {
         latitude: 49.30080957108101,
         longitude: -123.1337930524565,
@@ -52,34 +50,89 @@ export default class AccordionPage extends Component {
     }
     this.watchID = null
   }
+  renderDateHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Date ghost gear discovered</Text>
+      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+    </View>
+  }
+  renderColourHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Colour</Text>
+      <Text style={styles.secondText}>{this.state.colour}</Text>
+    </View>
+  }
+  renderMeshHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Mesh Size Measurement</Text>
+      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+    </View>
+  }
+  renderTwineHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Twine Size Measurement</Text>
+    </View>
+  }
+  renderMoreHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>More filter options</Text>
+    </View>
+  }
   _renderHeader(section) {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.firstText}>{section.firstln}</Text>
-        <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
-      </View>
-    )
+    switch(section.type){
+      case 'Date':
+        return this.renderDateHeader()
+      case 'Colour':
+        return this.renderColourHeader()
+      case 'Mesh':
+        return this.renderMeshHeader()
+      case 'Twine':
+        return this.renderTwineHeader()
+      case 'More':
+        return this.renderMoreHeader()
+    }
   }
   _renderContent(section) {
-    return (
-      <View style={styles.content}>
-      <TextInput ref = 'Date'
-        style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({date: text})}
-        maxLength = {2}
-        placeholder='DD'/>
-        <TextInput ref = 'Month'
+    switch(section.type){
+      case 'Date':
+      return (
+        <View style={styles.content}>
+        <TextInput ref = 'Date'
           style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({month: text})}
+          onChangeText={(text) => this.setState({date: text})}
           maxLength = {2}
-          placeholder='MM'/>
-      <TextInput ref = 'Year'
-        style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({year: text})}
-        maxLength = {4}
-        placeholder='YYYY'/>
-    </View>
-    )
+          placeholder='DD'/>
+          <TextInput ref = 'Month'
+            style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(text) => this.setState({month: text})}
+            maxLength = {2}
+            placeholder='MM'/>
+        <TextInput ref = 'Year'
+          style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => this.setState({year: text})}
+          maxLength = {4}
+          placeholder='YYYY'/>
+      </View>
+      )
+      case 'Colour':
+      return (<View style={styles.colorButtonContainer}>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#c6c6c6'}]} onPress={ () => this.setState({colour: 'Grey'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Grey</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#ffe401'}]} onPress={ () => this.setState({colour: 'Yellow'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Yellow</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#d2232a'}]} onPress={ () => this.setState({colour: 'Red'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Red</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#dd8200'}]} onPress={ () => this.setState({colour: 'Orange'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Orange</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#317a35'}]} onPress={ () => this.setState({colour: 'Green'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Green</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#9b471e'}]} onPress={ () => this.setState({colour: 'Brown'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Brown</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#0084ce'}]} onPress={ () => this.setState({colour: 'Blue'})} ><View style={styles.colorButtonView}><Text style={styles.textCenter}>Blue</Text></View></TouchableOpacity>
+        <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#000'}]} onPress={ () => this.setState({colour: 'Black'})} ><View style={styles.colorButtonView} ><Text style={styles.textCenter}>Black</Text></View></TouchableOpacity>
+      </View>)
+      case 'Mesh':
+        return this.renderMeshHeader()
+      case 'Twine':
+        return this.renderTwineHeader()
+      case 'More':
+        return this.renderMoreHeader()
+    }
+
   }
   componentWillMount(){
     navigator.geolocation.getCurrentPosition(
@@ -110,6 +163,36 @@ export default class AccordionPage extends Component {
   }
   render() {
     return (
+      <ScrollView style={styles.container}>
+        <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
+        <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}} elevation={8}>
+          <Text style={styles.text}>
+            Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
+          </Text>
+          <Text style={[styles.text, {marginTop: 20}]}>
+            Your action matters, numerous marine lives will be saved because of you!
+          </Text>
+          <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8}>
+            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
+              <Text style={{color: 'white', fontSize: 25}}>+</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <MapView style={{height: 200}}
+          region={this.state.region}
+          onRegionChange={(region)=>this.onRegionChange(region)}>
+          <MapView.Marker
+            coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}
+          />
+          <MapView.Marker
+            coordinate={{latitude: this.state.geoPosition.coords.latitude, longitude: this.state.geoPosition.coords.longitude}}
+          />
+        </MapView>
+        <TouchableOpacity style={styles.centerButton} onPress={()=>this.onCenter()}>
+          <Text>Center</Text>
+        </TouchableOpacity>
+
 
         <Accordion
           sections={SECTIONS}
@@ -118,7 +201,7 @@ export default class AccordionPage extends Component {
           renderHeader={this._renderHeader.bind(this)}
           renderContent={this._renderContent.bind(this)}
         />
-      //</ScrollView>
+      </ScrollView>
     )
   }
 }
@@ -134,6 +217,7 @@ const styles = StyleSheet.create({
   },
   content: {
     height: 60,
+    flexDirection: 'row',
     backgroundColor: 'white',
   },
   firstText: {
