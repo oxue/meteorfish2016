@@ -14,6 +14,8 @@ import React, {
   StatusBar,
   Modal,
   Slider,
+  Platform,
+  DatePickerIOS,
 } from 'react-native'
 import {Actions} from 'react-native-router-flux'
 const Accordion = require('react-native-collapsible/Accordion')
@@ -229,23 +231,27 @@ transparent={this.state.transparent}>
       case 'Date':
       return (
         <View style={styles.content}>
-          <TouchableOpacity>
-          </TouchableOpacity>
-        <TextInput ref = 'Date'
-          style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({date: text})}
-          maxLength = {2}
-          placeholder='DD'/>
-          <TextInput ref = 'Month'
-            style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => this.setState({month: text})}
-            maxLength = {2}
-            placeholder='MM'/>
-        <TextInput ref = 'Year'
-          style={{height: 50, width: 60, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({year: text})}
-          maxLength = {4}
-          placeholder='YYYY'/>
+          { Platform.OS === 'android'
+            ? <TouchableOpacity style={{flex:1, justifyContent: 'center', alignItems: 'center',}} onPress={async ()=>{
+              try {
+                const {action, year, month, day} = await DatePickerAndroid.open({
+                  // Use `new Date()` for current date.
+                  // May 25 2020. Month 0 is January.
+                  date: new Date(2020, 4, 25)
+                });
+                if (action !== DatePickerAndroid.dismissedAction) {
+                  // Selected year, month (0-11), day
+                }
+              } catch ({code, message}) {
+                console.warn('Cannot open date picker', message);
+              }
+            }}>
+              <Text>Open Date Picker</Text>
+            </TouchableOpacity>
+            : <View style={{flexDirection: 'row'}}>
+              <DatePickerIOS mode="datetime" date={new Date()} timeZoneOffsetInMinutes={(-1) * (new Date()).getTimezoneOffset() / 60}/>
+            </View>
+          }
       </View>
       )
       case 'Colour':
