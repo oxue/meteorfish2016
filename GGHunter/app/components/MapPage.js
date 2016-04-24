@@ -9,6 +9,7 @@ import React, {
   View,
   Geolocation,
   ScrollView,
+  StatusBar,
 } from 'react-native'
 import MapView from 'react-native-maps'
 
@@ -34,7 +35,7 @@ export default class MapPage extends Component {
 		{
 			 var name = data[i].firstName;
 			 var status = data[i].statusNow;
-			 
+
 			 //alert(name + status);
 			 this._addRow("Reported by: " + name + " Status: " + status);
 		}
@@ -64,7 +65,7 @@ export default class MapPage extends Component {
       isUsingCustomPosition: false,
     }
     this.watchID = null
-	
+
 	setInterval(
 		() => { this.downloadjson(); },
 		5000
@@ -97,14 +98,14 @@ export default class MapPage extends Component {
     let geoPosition = this.state.geoPosition
     this.setState({ region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude, isUsingCustomPosition: false} })
   }
-  
+
   _addRow(info)
   {
-	
+
 	this.state.rows.push(info);
 	this.setState({rows: this.state.rows});
   }
-  
+
   render() {
 	let rows = this.state.rows.map((r, i) => {
 		if (r.indexOf("Done") > -1)
@@ -138,9 +139,11 @@ export default class MapPage extends Component {
 		</View>
 		}
 	})
-	
+
     return (
       <ScrollView style={styles.container}>
+      <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
+
         <View style={{marginTop:64, marginBottom:20}} elevation={8}>
           <Text />
           <Text />
