@@ -45,9 +45,9 @@ export default class App extends Component {
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
         <Scene key="root" hideNavBar={true}>
           <Scene key="tabbar" tabs={true}   >
-            <Scene key="tab3" component={Saved} title="New Ghost Gear" icon={TabIcon} titleStyle={{color: 'white'}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
-            <Scene key="tab4" component={MapPage} title="Map" icon={TabIcon}/>
-            <Scene key="tab5" component={CameraPage} title="Photo" icon={TabIcon} />
+            <Scene key="tab3" component={Saved} title="About" icon={TabIcon} titleStyle={{color: 'white'}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
+            <Scene key="tab4" component={MapPage} title="Report Statuses" icon={TabIcon}/>
+            <Scene key="tab5" component={CameraPage} title="Photos" icon={TabIcon} />
             <Scene key="accordion" initial={true} component={Accordion} title="New Ghost Gear" icon={TabIcon} titleStyle={{color: 'white', top:10, bottom:0}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
           </Scene>
         </Scene>
