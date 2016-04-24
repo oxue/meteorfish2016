@@ -28,24 +28,24 @@ class TabIcon extends React.Component {
 
 export default class App extends Component {
   componentDidMount(){
-    fetch(server_url + '/parse/classes/gear?where='+encodeURIComponent('{"color":"green"}'), {
-      method: 'GET',
-      headers: {
-        'X-Parse-Application-Id': app_id,
-        'X-Parse-REST-API-Key': undefined,
-        //'Content-Type': ''
-      },
-    }).then((response)=>response.json()).then((jsonResponse)=>{
-      //console.log(jsonResponse.results[0].picture.url)
-      alert(JSON.stringify(jsonResponse.results))
-    })
+    // fetch(server_url + '/parse/classes/gear?where='+encodeURIComponent('{"color":"green"}'), {
+    //   method: 'GET',
+    //   headers: {
+    //     'X-Parse-Application-Id': app_id,
+    //     'X-Parse-REST-API-Key': undefined,
+    //     //'Content-Type': ''
+    //   },
+    // }).then((response)=>response.json()).then((jsonResponse)=>{
+    //   //console.log(jsonResponse.results[0].picture.url)
+    //   alert(JSON.stringify(jsonResponse.results))
+    // })
   }
   render() {
     return (
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
         <Scene key="root" hideNavBar={true}>
-          <Scene key="tabbar" tabs={true} >
-            <Scene key="tab3" component={Saved} title="Saved" icon={TabIcon}/>
+          <Scene key="tabbar" tabs={true}   >
+            <Scene key="tab3" component={Saved} title="New Ghost Gear" icon={TabIcon} titleStyle={{color: 'white'}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
             <Scene key="tab4" component={MapPage} title="Map" icon={TabIcon}/>
             <Scene key="tab5" component={CameraPage} title="Photo" icon={TabIcon} />
             <Scene key="accordion" component={Accordion} title="Accordion" icon={TabIcon} />
