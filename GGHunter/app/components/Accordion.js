@@ -24,7 +24,7 @@ const SECTIONS = [
   { type: 'Colour' },
   { type: 'Mesh' },
   { type: 'Twine' },
-  { type: 'More' },
+  { type: 'Submit' },
 ]
 
 export default class AccordionPage extends Component {
@@ -77,10 +77,16 @@ export default class AccordionPage extends Component {
       <Text style={styles.firstText}>Twine Size Measurement</Text>
     </View>
   }
-  renderMoreHeader(){
-    return <View style={styles.header}>
-      <Text style={styles.firstText}>More filter options</Text>
+  renderSubmitHeader(){
+    return <View style={{height: 60, backgroundColor: '#FF4366'}} onPress = {this.submitAll}>
+      <Text style={styles.firstText}>Submit</Text>
     </View>
+  }
+  submitAll(){
+    var imguri = this.props.img
+    var body = new FormData()
+    var guid = 'id' + Math.random()
+    body.append(imguri)
   }
   _renderHeader(section) {
     switch(section.type){
@@ -92,8 +98,8 @@ export default class AccordionPage extends Component {
         return this.renderMeshHeader()
       case 'Twine':
         return this.renderTwineHeader()
-      case 'More':
-        return this.renderMoreHeader()
+      case 'Submit':
+        return this.renderSubmitHeader()
     }
   }
   _renderContent(section) {
@@ -164,8 +170,8 @@ export default class AccordionPage extends Component {
         )
       case 'Twine':
         return this.renderTwineHeader()
-      case 'More':
-        return this.renderMoreHeader()
+      case 'Submit':
+        return this.renderSubmitHeader()
     }
 
   }
@@ -200,16 +206,19 @@ export default class AccordionPage extends Component {
     Actions.tab5()
   }
   render() {
-    var imageStyle = [styles.image, {width: 100, height: 100}];
+    var imageStyle = [styles.image, {width: Dimensions.get('window').width/2, height: 150 , padding: 0, margin: 0}];
 
     return (
 
       <ScrollView style={styles.container}>
         <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
-        <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}} elevation={8}>
+        <View style={{alignItems: 'center', backgroundColor: '#EEEEEE'}} elevation={8}>
         {( (this.props.img !=null && this.props.img !=undefined)
           ? <Image source = {{uri : this.props.img}} style = {imageStyle} ></Image>
-          : <Text style={styles.text}>Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!</Text>)
+          : <Text style={{ margin: 15,
+            color: '#7C7C7C',
+            fontSize: 14,
+          }}>Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!</Text>)
             }
 
           <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
@@ -251,6 +260,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 64,
   },
+
   header: {
     height: 60,
     backgroundColor: '#6161c2',
