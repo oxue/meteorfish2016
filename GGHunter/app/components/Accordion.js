@@ -60,14 +60,21 @@ export default class AccordionPage extends Component {
   }
   renderDateHeader(){
     return <View style={styles.header}>
-      <Text style={styles.firstText}>Date ghost gear discovered</Text>
-      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+      <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
+        <Image style={{width: 40, height: 40, marginLeft: 20 }} source={require('../img/ic_date_range_white.png')} resizeMode='contain'/>
+        <View style={styles.rowTextContainer}>
+          <Text style={styles.firstText}>Date ghost gear discovered</Text>
+          <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+        </View>
+      </View>
     </View>
   }
   renderColourHeader(){
     return <View style={styles.header}>
-      <Text style={styles.firstText}>Colour</Text>
-      <Text style={styles.secondText}>{this.state.colour}</Text>
+      <View style={styles.rowTextContainer}>
+        <Text style={styles.firstText}>Colour</Text>
+        <Text style={styles.secondText}>{this.state.colour}</Text>
+      </View>
     </View>
   }
   renderMeshHeader(){
@@ -79,10 +86,15 @@ export default class AccordionPage extends Component {
       : null;
 
     return <View style={styles.header}>
-      <Text style={styles.firstText}>Mesh Size Measurement</Text>
-	  <TouchableOpacity onPress={() => this.openModal()}>
-		<Image style={styles.question} source={require('../img/question.png')}/>
-      </TouchableOpacity>
+      <View style={{flex:1, flexDirection: 'row'}}>
+        <View style={[styles.rowTextContainer, {flex: 0}]}>
+          <Text style={styles.firstText}>Mesh Size Measurement</Text>
+          <Text style={styles.secondText}>{Math.round(this.state.sliderValue) + ' mm'}</Text>
+        </View>
+  	    <TouchableOpacity style={{marginLeft: 8, marginTop: 10}} onPress={() => this.openModal()}>
+  		    <Image style={styles.question} source={require('../img/question.png')}/>
+        </TouchableOpacity>
+      </View>
 <Modal visible={this.state.isModalOpen} onRequestClose={() => {this.closeModal()}}
 style={styles.modal}
 animated={this.state.animated}
@@ -107,7 +119,7 @@ transparent={this.state.transparent}>
 	</View>
 
 </Modal>
-      <Text style={styles.secondText}>{Math.round(this.state.sliderValue) + ' mm'}</Text>
+
     </View>
   }
   renderTwineHeader(){
@@ -202,13 +214,10 @@ transparent={this.state.transparent}>
       </View>)
       case 'Mesh':
         return (
-          <View style={styles.container}>
           <View>
-            <Text>{this.state.sliderValue.toFixed(0, 10)}</Text>
-          </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', height: 60}}>
               <View style={{flex: 1}}>
-                <Text style={{fontSize: 11, marginLeft: 10}}>Mesh Size (mm)</Text>
+                <Text style={{fontSize: 11, marginLeft: 10, textAlign: 'center'}}>Mesh Size (mm)</Text>
               </View>
               <View style={{flex:2, marginHorizontal: 10}}>
                 <Slider
@@ -221,15 +230,15 @@ transparent={this.state.transparent}>
               </View>
             </View>
             <View style={styles.fingerButtonContainer}>
-              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 0}) }></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 2/9*250})} ></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 3/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 4/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 5/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 6/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 7/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 8/9*250})}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 250}) }></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 20}) }><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f0.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 33})} ><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f1.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 50})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f2.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 65})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f3.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 85})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f4.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 110})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f5.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 145})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f6.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 198})}><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f7.png')}/></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 240}) }><Image style={styles.fingerButtonImg} resizeMode='contain' source={require('../img/f8.png')}/></TouchableOpacity>
             </View>
           </View>
         )
@@ -314,17 +323,13 @@ transparent={this.state.transparent}>
                 Your action matters, numerous marine lives will be saved because of you!
               </Text>
               <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
-                <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
-                  <Text style={{color: 'white', fontSize: 25}}>+</Text>
-                </View>
+                <Image style={{width: 50, height: 50}} source={require('../img/camera_red.png')}/>
               </TouchableOpacity>
             </View>
           }
           { this.props.img
             ? <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
-                <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
-                  <Text style={{color: 'white', fontSize: 25}}>+</Text>
-                </View>
+                <Image style={{width: 50, height: 50}} source={require('../img/camera_red.png')}/>
               </TouchableOpacity>
             : null
           }
@@ -339,11 +344,10 @@ transparent={this.state.transparent}>
           <MapView.Marker
             coordinate={{latitude: this.state.geoPosition.coords.latitude, longitude: this.state.geoPosition.coords.longitude}}
           />
+          {/*<TouchableOpacity style={styles.centerButton} onPress={()=>this.onCenter()}>
+            <Text>Center</Text>
+          </TouchableOpacity>*/}
         </MapView>
-        <TouchableOpacity style={styles.centerButton} onPress={()=>this.onCenter()}>
-          <Text>Center</Text>
-        </TouchableOpacity>
-
 
         <Accordion
           sections={SECTIONS}
@@ -352,6 +356,7 @@ transparent={this.state.transparent}>
           renderHeader={this._renderHeader.bind(this)}
           renderContent={this._renderContent.bind(this)}
         />
+        <View style={{height: 100}}/>
       </ScrollView>
     )
   }
@@ -362,7 +367,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 64,
   },
-
   header: {
     height: 60,
     backgroundColor: '#6161c2',
@@ -372,20 +376,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
   },
+  rowTextContainer: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    marginLeft: 20,
+  },
   firstText: {
     fontSize : 14,
-    marginLeft: 40,
-    marginTop: 10,
-
     color : '#fff',
-    textAlign : 'left'
   },
   secondText: {
     fontSize : 14,
-    marginLeft: 40,
-
     color : '#c5c5c5',
-    textAlign : 'left'
   },
   centerButton:{
     position: 'absolute',
@@ -420,8 +423,8 @@ const styles = StyleSheet.create({
   },
 
   fingerButtonContainer: {
-    height: 200,
     marginLeft: 8,
+    marginBottom: 8,
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -455,11 +458,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   fingerButton: {
-    width: width*0.185,
-    height: 70,
+    width: width*0.315,
+    height: 115,
     borderWidth: 1,
     borderColor: '#BBBCBC',
     margin: 1,
-  }
-
+  },
+  fingerButtonImg: {
+    width: width*0.310,
+    height: 114,
+  },
 })
