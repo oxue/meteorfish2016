@@ -116,11 +116,12 @@ transparent={this.state.transparent}>
     </View>
   }
   renderSubmitHeader(){
-    return <View style={{height: 60, backgroundColor: '#FF4366'}} onPress = {this.submitAll}>
+    return <View style={{height: 60, backgroundColor: '#FF4366'}} onPress = {() => this.submitAll()}>
       <Text style={styles.firstText}>Submit</Text>
     </View>
   }
   submitAll(){
+    console.log('weed');
     var imguri = this.props.img
     var body = new FormData()
     var guid = 'id' + Math.random()
@@ -314,6 +315,12 @@ transparent={this.state.transparent}>
           <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
             <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
               <Text style={{color: 'white', fontSize: 25}}>+</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{position: 'absolute', right: 80, bottom: 0, padding: 4}} elevation={8} onPress = {this.submitAll.bind(this)}>
+            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
+              <Text style={{color: 'white', fontSize: 25}}>^</Text>
             </View>
           </TouchableOpacity>
         </View>
