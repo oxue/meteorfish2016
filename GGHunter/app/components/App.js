@@ -13,6 +13,7 @@ import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-nati
 import CameraPage from './CameraPage'
 import MapPage from './MapPage'
 import Saved from './Saved'
+import Accordion from './Accordion'
 
 class TabIcon extends React.Component {
   render(){
@@ -31,6 +32,7 @@ export default class App extends Component {
             <Scene key="tab3" component={Saved} title="Saved" icon={TabIcon}/>
             <Scene key="tab4" component={MapPage} title="Map" icon={TabIcon}/>
             <Scene key="tab5" component={CameraPage} title="Photo" icon={TabIcon} />
+            <Scene key="accordion" component={Accordion} title="Accordion" icon={TabIcon} />
           </Scene>
         </Scene>
       </Router>
