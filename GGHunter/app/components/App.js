@@ -57,6 +57,7 @@ export default class App extends Component {
             <Scene key="tab3" component={Saved} title="About" icon={TabIcon} titleStyle={{color: 'white', top:Platform.OS === 'android'?10:20, bottom:0}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
             <Scene key="accordion" initial={true} component={Accordion} title="New Ghost Gear" icon={TabIcon} titleStyle={{color: 'white', top:Platform.OS === 'android'?10:20, bottom:0}} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
             <Scene key="tab4" component={MapPage} titleStyle={{color: 'white', top:Platform.OS === 'android'?10:20, bottom:0}} title="Report Statuses" icon={TabIcon} navigationBarStyle={{backgroundColor:'#4842B8'}}/>
+            <Scene key="tab5" component={CameraPage} title="Photos"/>
           </Scene>
         </Scene>
       </Router>
