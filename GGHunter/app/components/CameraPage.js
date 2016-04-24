@@ -8,6 +8,7 @@ import React, {
   View,
 } from 'react-native'
 import Camera from 'react-native-camera'
+import {Actions} from 'react-native-router-flux'
 
 export default class CameraPage extends Component {
   render() {
@@ -28,7 +29,12 @@ export default class CameraPage extends Component {
   }
   takePicture() {
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data)
+        Actions.accordion()
+        Actions.refresh({img:data})
+
+      })
       .catch(err => console.error(err))
   }
 }

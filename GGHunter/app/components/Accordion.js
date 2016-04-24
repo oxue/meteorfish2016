@@ -3,6 +3,7 @@ import React, {
   DatePickerAndroid,
   Easing,
   View,
+  Image,
   Text,
   TextInput,
   StyleSheet,
@@ -11,7 +12,9 @@ import React, {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  Slider,
 } from 'react-native'
+import {Actions} from 'react-native-router-flux'
 const Accordion = require('react-native-collapsible/Accordion')
 let {width, height} = Dimensions.get('window')
 import MapView from 'react-native-maps'
@@ -28,6 +31,7 @@ export default class AccordionPage extends Component {
   constructor(props, context){
     super(props, context)
     this.state = {
+      sliderValue: 150,
       date: 'Date',
       month: 'Month',
       year: 'Year',
@@ -65,7 +69,7 @@ export default class AccordionPage extends Component {
   renderMeshHeader(){
     return <View style={styles.header}>
       <Text style={styles.firstText}>Mesh Size Measurement</Text>
-      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+      <Text style={styles.secondText}>{Math.round(this.state.sliderValue) + ' mm'}</Text>
     </View>
   }
   renderTwineHeader(){
@@ -126,7 +130,38 @@ export default class AccordionPage extends Component {
         <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#000'}]} onPress={ () => this.setState({colour: 'Black'})} ><View style={styles.colorButtonView} ><Text style={styles.textCenter}>Black</Text></View></TouchableOpacity>
       </View>)
       case 'Mesh':
-        return this.renderMeshHeader()
+        return (
+          <View style={styles.container}>
+          <View>
+            <Text>{this.state.sliderValue.toFixed(0, 10)}</Text>
+          </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{flex: 1}}>
+                <Text style={{fontSize: 11, marginLeft: 10}}>Mesh Size (mm)</Text>
+              </View>
+              <View style={{flex:2, marginHorizontal: 10}}>
+                <Slider
+                  value={this.state.sliderValue}
+                  onValueChange={(sliderValue)=>this.setState({sliderValue})}
+                  onSlidingComplete={(sliderValue)=>{}}
+                  maximumValue={250}
+                  minimumValue={0}
+                />
+              </View>
+            </View>
+            <View style={styles.fingerButtonContainer}>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+            </View>
+          </View>
+        )
       case 'Twine':
         return this.renderTwineHeader()
       case 'More':
@@ -161,18 +196,23 @@ export default class AccordionPage extends Component {
     let geoPosition = this.state.geoPosition
     this.setState({ region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude, isUsingCustomPosition: false} })
   }
+  takePhoto(){
+    Actions.tab5()
+  }
   render() {
+    var imageStyle = [styles.image, {width: 100, height: 100}];
+
     return (
+
       <ScrollView style={styles.container}>
         <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
         <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}} elevation={8}>
-          <Text style={styles.text}>
-            Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
-          </Text>
-          <Text style={[styles.text, {marginTop: 20}]}>
-            Your action matters, numerous marine lives will be saved because of you!
-          </Text>
-          <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8}>
+        {( (this.props.img !=null && this.props.img !=undefined)
+          ? <Image source = {{uri : this.props.img}} style = {imageStyle} ></Image>
+          : <Text style={styles.text}>Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!</Text>)
+            }
+
+          <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8} onPress = {this.takePhoto}>
             <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
               <Text style={{color: 'white', fontSize: 25}}>+</Text>
             </View>
@@ -265,6 +305,21 @@ const styles = StyleSheet.create({
   },
   textCenter:{
     textAlign:'center'
+  },
+
+  fingerButtonContainer: {
+    height: 200,
+    marginLeft: 8,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  fingerButton: {
+    width: width*0.185,
+    height: 70,
+    borderWidth: 1,
+    borderColor: '#BBBCBC',
+    margin: 1,
   }
 
 })
