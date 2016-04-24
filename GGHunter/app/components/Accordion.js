@@ -17,16 +17,11 @@ let {width, height} = Dimensions.get('window')
 import MapView from 'react-native-maps'
 
 const SECTIONS = [
-  {
-    firstln: 'Date ghost gear discovered',
-    secondln: Date(),
-    content: 'Lorem ipsum...',
-  },
-  {
-    firstln: 'Colour',
-    secondln: 'Grey',
-    content: 'Lorem ipsum...',
-  }
+  { type: 'Date' },
+  { type: 'Colour' },
+  { type: 'Mesh' },
+  { type: 'Twine' },
+  { type: 'More' },
 ]
 
 export default class AccordionPage extends Component {
@@ -52,13 +47,47 @@ export default class AccordionPage extends Component {
     }
     this.watchID = null
   }
+  renderDateHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Date ghost gear discovered</Text>
+      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+    </View>
+  }
+  renderColourHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Colour</Text>
+      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+    </View>
+  }
+  renderMeshHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Mesh Size Measurement</Text>
+      <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
+    </View>
+  }
+  renderTwineHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>Twine Size Measurement</Text>
+    </View>
+  }
+  renderMoreHeader(){
+    return <View style={styles.header}>
+      <Text style={styles.firstText}>More filter options</Text>
+    </View>
+  }
   _renderHeader(section) {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.firstText}>{section.firstln}</Text>
-        <Text style={styles.secondText}>{this.state.date + ' ' + this.state.month + ' ' + this.state.year}</Text>
-      </View>
-    )
+    switch(section.type){
+      case 'Date':
+        return this.renderDateHeader()
+      case 'Colour':
+        return this.renderColourHeader()
+      case 'Mesh':
+        return this.renderMeshHeader()
+      case 'Twine':
+        return this.renderTwineHeader()
+      case 'More':
+        return this.renderMoreHeader()
+    }
   }
   _renderContent(section) {
     return (
@@ -120,7 +149,8 @@ export default class AccordionPage extends Component {
             Your action matters, numerous marine lives will be saved because of you!
           </Text>
           <TouchableOpacity style={{position: 'absolute', right: 0, bottom: 0, padding: 4}} elevation={8}>
-            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25}} elevation={8}>
+            <View style={{backgroundColor: '#FF4366', height: 50, width: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center'}} elevation={8}>
+              <Text style={{color: 'white', fontSize: 25}}>+</Text>
             </View>
           </TouchableOpacity>
         </View>
