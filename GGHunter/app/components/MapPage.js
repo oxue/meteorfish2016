@@ -36,7 +36,7 @@ export default class MapPage extends Component {
       geoPosition=>{
         this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
       },
-      error => console.err(error),
+      error => console.error(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
     navigator.geolocation.watchPosition(
@@ -47,7 +47,7 @@ export default class MapPage extends Component {
           this.setState({ geoPosition, region: {...this.state.region, latitude: geoPosition.coords.latitude, longitude: geoPosition.coords.longitude} })
         }
       },
-      error => console.err(error),
+      error => console.error(error),
       {enableHighAccuracy: true, timeout: 20000},
     )
   }

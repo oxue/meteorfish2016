@@ -15,6 +15,9 @@ import MapPage from './MapPage'
 import Saved from './Saved'
 import Accordion from './Accordion'
 
+const app_id = '3f945af2-d32f-47cb-aa03-da745c50880d'
+const server_url = 'https://ghostgearhunter.azurewebsites.net'
+
 class TabIcon extends React.Component {
   render(){
     return (
@@ -24,6 +27,17 @@ class TabIcon extends React.Component {
 }
 
 export default class App extends Component {
+  componentDidMount(){
+    fetch(server_url + '/parse/classes/gear', {
+      method: 'GET',
+      headers: {
+        'X-Parse-Application-Id': app_id,
+        'X-Parse-REST-API-Key': undefined,
+      }
+    }).then((response)=>response.json()).then((jsonResponse)=>{
+      console.log(jsonResponse.results[0].picture.url)
+    })
+  }
   render() {
     return (
       <Router sceneStyle={{backgroundColor:'#F7F7F7'}}>
