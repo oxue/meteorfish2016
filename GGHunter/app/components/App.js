@@ -12,15 +12,9 @@ import React, {
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 import CameraPage from './CameraPage'
 import MapPage from './MapPage'
-import ParseServerAzure from'parse-server-azure'
 
 const app_id = '3f945af2-d32f-47cb-aa03-da745c50880d'
 const server_url = 'https://ghostgearhunter.azurewebsites.net'
-
-const api = new ParseServer({
-  appId: app_id,
-  serverURL: server_url
-})
 
 class TabIcon extends React.Component {
   render(){
@@ -32,14 +26,14 @@ class TabIcon extends React.Component {
 
 export default class App extends Component {
   componentDidMount(){
-    const Gear = api.Object.extend('gear')
-    const gear = new Gear()
-    gear.save({
-      color:'green'
-    }, gear=>{
-
-    }, (gear, error)=>{
-      alert('error')
+    fetch(server_url + '/parse/classes/gear', {
+      method: 'GET',
+      headers: {
+        'X-Parse-Application-Id': app_id,
+        'X-Parse-REST-API-Key': undefined,
+      }
+    }).then((response)=>response.json()).then((jsonResponse)=>{
+      console.log(jsonResponse.results[0].picture.url)
     })
   }
   render() {

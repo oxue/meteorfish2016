@@ -6,7 +6,6 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "parse-server-azure": "^1.1.0",
     "react": "^0.14.8",
     "react-native": "^0.24.1",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
