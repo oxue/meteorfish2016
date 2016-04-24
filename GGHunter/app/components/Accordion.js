@@ -90,6 +90,18 @@ export default class AccordionPage extends Component {
     }
   }
   _renderContent(section) {
+    switch(section.type){
+      case 'Date':
+        return this.renderDateHeader()
+      case 'Colour':
+        return this.renderColourHeader()
+      case 'Mesh':
+        return this.renderMeshHeader()
+      case 'Twine':
+        return this.renderTwineHeader()
+      case 'More':
+        return this.renderMoreHeader()
+    }
     return (
       <View style={styles.content}>
       <TextInput ref = 'Date'
@@ -204,6 +216,7 @@ const styles = StyleSheet.create({
   },
   content: {
     height: 60,
+    flexDirection: 'row';
     backgroundColor: 'white',
   },
   firstText: {
