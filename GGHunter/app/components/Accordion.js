@@ -110,42 +110,7 @@ export default class AccordionPage extends Component {
   }
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <StatusBar backgroundColor='#393593' barStyle="light-content" translucent={false}/>
-        <View style={{paddingHorizontal:20, paddingVertical: 34, backgroundColor: '#EEEEEE'}} elevation={8}>
-          <Text style={styles.text}>
-            Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
-          </Text>
-          <Text style={[styles.text, {marginTop: 20}]}>
-            Your action matters, numerous marine lives will be saved because of you!
-          </Text>
-        </View>
-        <MapView style={{height: 300}}
-          region={this.state.region}
-          onRegionChange={(region)=>this.onRegionChange(region)}>
-          <MapView.Marker
-            coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}
-          />
-          <MapView.Marker
-            coordinate={{latitude: this.state.geoPosition.coords.latitude, longitude: this.state.geoPosition.coords.longitude}}
-          />
-        </MapView>
-        <TouchableOpacity style={styles.centerButton} onPress={()=>this.onCenter()}>
-          <Text>Center</Text>
-        </TouchableOpacity>
-        <View style={{backgroundColor: '#4842b8', height:100}}>
-          <Text style={[styles.text, {color:'#c5c5c5'}]}>color</Text>
-        </View>
-        <View style={styles.colorButtonContainer}>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#c6c6c6'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Grey</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#ffe401'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Yellow</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#d2232a'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Red</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#dd8200'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Orange</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#317a35'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Green</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#9b471e'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Brown</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#0084ce'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Blue</Text></View></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorButton, {backgroundColor:'#000'}]}><View style={styles.colorButtonView}><Text style={styles.textCenter}>Black</Text></View></TouchableOpacity>
-        </View>
+
         <Accordion
           sections={SECTIONS}
           initiallyActiveSection = {0}
@@ -153,7 +118,7 @@ export default class AccordionPage extends Component {
           renderHeader={this._renderHeader.bind(this)}
           renderContent={this._renderContent.bind(this)}
         />
-      </ScrollView>
+      //</ScrollView>
     )
   }
 }
