@@ -31,7 +31,7 @@ export default class AccordionPage extends Component {
   constructor(props, context){
     super(props, context)
     this.state = {
-      sliderValue: 150,
+      sliderValue: 125,
       date: 'Date',
       month: 'Month',
       year: 'Year',
@@ -182,15 +182,15 @@ export default class AccordionPage extends Component {
               </View>
             </View>
             <View style={styles.fingerButtonContainer}>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
-              <TouchableOpacity style={styles.fingerButton}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 0}) }></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 2/9*250})} ></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 3/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 4/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 5/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 6/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 7/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton}onPress = {() => this.setState({sliderValue: 8/9*250})}></TouchableOpacity>
+              <TouchableOpacity style={styles.fingerButton} onPress = {() => this.setState({sliderValue: 250}) }></TouchableOpacity>
             </View>
           </View>
         )
@@ -201,6 +201,7 @@ export default class AccordionPage extends Component {
     }
 
   }
+
   componentWillMount(){
     navigator.geolocation.getCurrentPosition(
       geoPosition=>{
