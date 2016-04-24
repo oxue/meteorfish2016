@@ -41,7 +41,7 @@ export default class MapPage extends Component {
 	  })
 	})
 	.catch((err)=>{
-	  alert("error getting json");
+	  //alert("error getting json");
 	})
 }
 
@@ -110,31 +110,31 @@ export default class MapPage extends Component {
 		if (r.indexOf("Done") > -1)
 		{
 		return <View>
-			<Text style={{color: 'green', fontSize: 15}}>Record: {i} - {r}</Text>
+			<Text style={{color: 'green', fontSize: 17}}>Record: {i} - {r}</Text>
 		</View>
 		}
 		else if (r.indexOf("Additional Information Required") > -1)
 		{
 		return <View>
-			<Text style={{color: 'red', fontSize: 15}}>Record: {i} - {r}</Text>
+			<Text style={{color: 'red', fontSize: 17}}>Record: {i} - {r}</Text>
 		</View>
 		}
 		else if (r.indexOf("Dispatched") > -1)
 		{
 		return <View>
-			<Text style={{color: 'orange', fontSize: 15}}>Record: {i} - {r}</Text>
+			<Text style={{color: 'orange', fontSize: 17}}>Record: {i} - {r}</Text>
 		</View>
 		}
 		else if (r.indexOf("Report Received") > -1)
 		{
 		return <View>
-			<Text style={{color: 'blue', fontSize: 15}}>Record: {i} - {r}</Text>
+			<Text style={{color: 'blue', fontSize: 17}}>Record: {i} - {r}</Text>
 		</View>
 		}
 		else
 		{
 		return <View>
-			<Text>Record: {i} - {r}</Text>
+			<Text style={{color: 'black', fontSize: 17}}>Record: {i} - {r}</Text>
 		</View>
 		}
 	})
@@ -142,13 +142,10 @@ export default class MapPage extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={{marginTop:64, marginBottom:20}} elevation={8}>
-          <Text style={styles.text}>Ghost Gear Hunters! Please take a minute and help us to identify the ghost gear by taking a photo of the discovered gear and answering some questions!
-
-          </Text>
           <Text />
           <Text />
-          <Text style={styles.text}>
-                          Your action matters, numerous marine lives will be saved because of you!
+          <Text style={styles.text2}>
+		  Submitted Report Statuses
           </Text>
         </View>
 		{rows}
@@ -195,6 +192,11 @@ const styles = StyleSheet.create({
   text:{
     color: 'black',
     fontSize:20,
+  },
+  text2:{
+    color: 'black',
+    fontSize:20,
+	fontWeight: 'bold',
   },
   colorButtonContainer:{
     height: 200,
